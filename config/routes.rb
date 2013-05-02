@@ -1,11 +1,21 @@
 SampleApp::Application.routes.draw do
-  get "static_pages/home"
 
-  get "static_pages/help"
+  get "users/new"
+
+  #This code maps the root URI / to /static_pages/home, and also gives URI helpers as follows:
+  #root_path => '/'
+  #root_url  => 'http://localhost:3000/'
+  root to: 'static_pages#home'
   
-  get "static_pages/about"
-  
-  get "static_pages/contact"
+  # This matches ’/about’ and routes it to the about action in the StaticPages controller
+  # and automatically creates named routes for use in the controllers and views:
+  # In 'about' Example:
+  # about_path => '/about'
+  # about_url  => 'http://localhost:3000/about'
+  match '/signup',  to: 'users#new'
+  match '/help',    to: 'static_pages#help'
+  match '/about',   to: 'static_pages#about'
+  match '/contact', to: 'static_pages#contact'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
